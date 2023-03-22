@@ -56,9 +56,15 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
 		if (itemExists) {
 			return;
 		} else {
-			setCartItems([...cartItems, { ...item, quantity: 1 }]);
+			setCartItems((prevCartItems) => {
+				const updatedCartItems = [
+					...prevCartItems,
+					{ ...item, quantity: 1 },
+				];
+				saveCart(updatedCartItems);
+				return updatedCartItems;
+			});
 		}
-		saveCart(cartItems);
 		showConfirmationMessage();
 	};
 
