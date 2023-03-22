@@ -2,6 +2,7 @@ import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from "next";
 import { images, ImageData, categories } from "../../data/sampleData";
 import Image from "next/image";
 import Link from "next/link";
+import { useCart } from "@/contexts/CartContext";
 import FeaturedProducts from "@/components/FeaturedProducts";
 import PageTitle from "@/components/PageTitle";
 
@@ -69,6 +70,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
 	image,
 	relatedImages,
 }) => {
+	const { addToCart } = useCart();
 	return (
 		<main className='container'>
 			<PageTitle
@@ -99,7 +101,9 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
 							elit. Fusce auctor lectus eget orci pharetra, nec
 							tincidunt enim tempus.
 						</p>
-						<button className='bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600'>
+						<button
+							className='bg-gray-800 hover:bg-gray-700 text-white text-sm font-medium py-1 px-3 border border-gray-800 rounded'
+							onClick={(e) => addToCart(image)}>
 							Add to Cart
 						</button>
 					</div>
