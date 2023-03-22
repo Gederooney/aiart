@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useCart } from "@/contexts/CartContext";
 import FeaturedProducts from "@/components/FeaturedProducts";
 import PageTitle from "@/components/PageTitle";
+import AddedToCart from "@/components/AddedToCart";
 
 interface ProductDetailProps {
 	image: ImageData;
@@ -70,13 +71,14 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
 	image,
 	relatedImages,
 }) => {
-	const { addToCart } = useCart();
+	const { addToCart, showConfirmation } = useCart();
 	return (
 		<main className='container'>
 			<PageTitle
 				title={image.title}
 				poster={image.imageUrl}
 			/>
+			{showConfirmation && <AddedToCart />}
 			<div className='container mx-auto px-4 py-12'>
 				<div className='flex flex-wrap md:flex-nowrap'>
 					<div className='w-full md:w-1/2 mb-8 md:mb-0 md:pr-8'>
